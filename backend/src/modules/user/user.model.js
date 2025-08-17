@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
    name : {
-    type : string ,
+    type : String ,
     required : true , 
     trim : true , 
     maxLength : 100
    },
    email : {    
-    type : string,
+    type : String,
     required  : true , 
     lowercase : true,
     trim : true , 
@@ -23,26 +23,31 @@ const userSchema = mongoose.Schema({
     }
 },
    password  : {
-    type : string,
+    type : String,
     default : null,
     select : false
 },
    roles : {
-    type : string,
+    type : String,
     enum : ["learner","instructor","admin"],
     default : "leaner",
     index : true
 },
  status : {
-    type : string, 
+    type : String, 
     enum : ["active","pending","deleted","suspended"],
     index : true
  },
  lastloginAt : {
     type : Date
-}
- 
-},{
+},
+   courses : {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : 'Course'
+   }
+   
+},
+{
     timestamps: true, 
     versionKey: false, 
     toJSON: {
@@ -55,5 +60,5 @@ const userSchema = mongoose.Schema({
     toObject: { virtuals: true },
   });
 
-  
+
  export const User = mongoose.model("User",userSchema);
