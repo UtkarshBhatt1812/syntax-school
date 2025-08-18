@@ -30,12 +30,13 @@ const userSchema = mongoose.Schema({
    roles : {
     type : String,
     enum : ["learner","instructor","admin"],
-    default : "leaner",
+    default : "learner",
     index : true
 },
  status : {
     type : String, 
     enum : ["active","pending","deleted","suspended"],
+    default : "pending",
     index : true
  },
  lastloginAt : {
