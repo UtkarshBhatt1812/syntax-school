@@ -1,9 +1,7 @@
 
 import { verifyToken } from "../utils/jwt.js";
 
-
-
-export const authMiddleware = (req, res, next) => {
+ const authMiddleware = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -22,7 +20,6 @@ export const authMiddleware = (req, res, next) => {
     }
 
     req.user = decoded; 
-    console.log("Authenticated User:", req.user);
     next();
 
   } catch (err) {
@@ -30,3 +27,4 @@ export const authMiddleware = (req, res, next) => {
     return res.status(403).json({ message: "Authentication failed" });
   }
 };
+export default authMiddleware
